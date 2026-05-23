@@ -101,11 +101,27 @@ _engine = None
 _session_maker: async_sessionmaker[AsyncSession] | None = None
 
 
+def _normalize_database_url(url: str) -> str:
+    """Force the async driver for Postgres so plain ``postgresql://`` URLs
+    pasted from Supabase still work.
+
+    SQLAlchemy defaults the ``postgresql://`` scheme to the sync psycopg2
+    dialect; ``create_async_engine`` then errors with ``ModuleNotFoundError:
+    No module named 'psycopg2'``. Rewriting to ``postgresql+asyncpg://`` keeps
+    the URL in async-land.
+    """
+    if url.startswith("postgres://"):
+        url = "postgresql://" + url[len("postgres://"):]
+    if url.startswith("postgresql://") and "+asyncpg" not in url:
+        url = "postgresql+asyncpg://" + url[len("postgresql://"):]
+    return url
+
+
 def get_engine():
     global _engine
     if _engine is None:
         settings = get_settings()
-        url = settings.database_url
+        url = _normalize_database_url(settings.database_url)
         connect_args: dict = {}
         # Supabase transaction-mode pooler (port 6543) doesn't support prepared
         # statements. asyncpg caches them by default, so the second query fails
