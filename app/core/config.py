@@ -13,6 +13,11 @@ class Settings(BaseSettings):
     host: str = "0.0.0.0"
     port: int = 8000
     cors_origins: str = "http://localhost:3000"
+    # Optional regex (Python re) that, if set, allows any origin matching it
+    # in addition to the explicit list in cors_origins. Use this on Render so
+    # every Vercel preview-deploy URL passes CORS without updating env vars
+    # on every push. Example: https://.*\.vercel\.app
+    cors_origin_regex: str = ""
 
     # Database
     database_url: str = "sqlite+aiosqlite:///./clausemark.db"
