@@ -134,4 +134,5 @@ clausemark-backend/
 
 ## License
 
-Proprietary. © Syed Wasif Shah / automatewithwasif.com
+Proprietary. © Hammad Nasir / hammadnasir797@gmail.com
+
