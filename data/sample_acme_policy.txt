@@ -1,0 +1,83 @@
+ACME AI PRIVACY AND GOVERNANCE POLICY
+
+Version 2.4 — Effective Date: 1 January 2026
+
+1. INTRODUCTION
+
+This policy governs the use of artificial intelligence systems at Acme AI Inc. It applies to all AI-driven product features, employee tools, and customer-facing automated decision systems.
+
+2. RISK MANAGEMENT
+
+2.1 Risk identification
+
+Acme AI maintains a documented risk management process for all AI systems classified as high-risk. The process is reviewed quarterly and updated when material changes occur. Identified risks include unintended bias, accuracy degradation, and potential harm to users from automated decisions.
+
+2.2 Risk evaluation
+
+For each identified risk, we evaluate severity and likelihood. Risks are documented in our central risk register, which is reviewed by the AI Governance Committee at least once every six months. Mitigation measures are tracked through resolution.
+
+2.3 Ongoing monitoring
+
+We perform regular post-deployment monitoring of all high-risk AI systems. Monitoring includes statistical drift detection, sample-based output review, and customer feedback channels.
+
+3. DATA GOVERNANCE
+
+3.1 Training data
+
+All training datasets used in AI model development undergo a quality review covering relevance, representativeness, error analysis, and bias detection. Reviews are documented and approved by the Head of Data prior to model training.
+
+3.2 Data minimization
+
+Personal data used in AI training is limited to what is strictly necessary for the intended purpose. Where synthetic or anonymized data is feasible, it is preferred.
+
+3.3 Retention
+
+Customer personal data used in AI training is retained for the duration of the active contract and deleted within 90 days of contract termination, unless retention is required by law.
+
+4. TRANSPARENCY
+
+4.1 User notification
+
+Customers are informed via in-product notices and our documentation when they interact with an AI system. The notices describe the system's purpose, key capabilities, and known limitations.
+
+4.2 Output explanation
+
+For each automated decision affecting a customer, we provide a human-readable explanation of the factors that influenced the decision, available on request.
+
+5. HUMAN OVERSIGHT
+
+5.1 Designated reviewers
+
+Every high-risk AI feature has a designated human reviewer with the authority to override, disable, or roll back the system. Reviewers receive annual training on the system's capabilities and limitations.
+
+5.2 Override procedure
+
+Reviewers may override any automated decision through the AI Operations console. All overrides are logged.
+
+6. ACCURACY AND ROBUSTNESS
+
+6.1 Accuracy metrics
+
+Each AI model is accompanied by documented accuracy metrics measured on representative held-out test data. Metrics are recomputed monthly and published in our model registry.
+
+6.2 Security
+
+AI systems are protected against adversarial inputs through input validation, rate limiting, and anomaly detection at the API layer.
+
+7. RECORD-KEEPING
+
+7.1 Logging
+
+The system automatically generates event logs covering model inferences, decision overrides, and system errors. Logs are retained for a minimum of 12 months.
+
+8. MARKETING COMMUNICATIONS
+
+8.1 Marketing emails
+
+Customers may opt in to receive promotional emails about new product features. Opt-out is available via unsubscribe links in every email.
+
+9. SHIPPING AND DELIVERY
+
+9.1 Hardware orders
+
+For customers ordering Acme branded hardware, shipping is fulfilled within 5 business days. Tracking information is provided via email.

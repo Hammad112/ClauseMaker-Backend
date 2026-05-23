@@ -1,0 +1,46 @@
+# Render free-tier production dependencies.
+#
+# Why this file instead of just uncommenting requirements.txt:
+#   The full BGE embedder + bge-reranker-base + PyTorch CPU runtime add up to
+#   ~300 MB resident, which leaves <200 MB for Python + FastAPI + boto3 +
+#   request handling on Render's 512 MB free tier. That's tight enough to OOM
+#   under load. We keep the lightweight hash embedder + overlap reranker (which
+#   the LLM compensates for via real Groq/Gemini reasoning) and skip the heavy
+#   ML deps. Upgrade to Render Starter ($7/mo, 1 GB RAM) and set
+#   USE_REAL_EMBEDDER=true, USE_REAL_RERANKER=true to switch on the full stack.
+
+# --- Core API ---
+fastapi==0.136.1
+uvicorn==0.47.0
+pydantic==2.13.4
+pydantic-settings==2.14.1
+python-multipart==0.0.29
+httpx==0.28.1
+loguru==0.7.3
+
+# --- Persistence ---
+sqlalchemy==2.0.49
+aiosqlite==0.22.1
+asyncpg==0.30.0   # for Supabase Postgres via DATABASE_URL=postgresql+asyncpg://...
+
+# --- Vector store ---
+qdrant-client==1.18.0
+
+# --- Document parsing + PDF export ---
+pypdf==4.3.1
+python-docx==1.1.2
+reportlab==4.2.5
+
+# --- LLM providers (real, not mock) ---
+groq==0.11.0
+google-generativeai==0.8.3
+
+# --- Object storage (Cloudflare R2 via S3-compatible API) ---
+boto3==1.35.55
+
+# --- Observability ---
+sentry-sdk[fastapi]==2.18.0
+langfuse==2.55.0   # optional — wraps every LLM call when LANGFUSE_* keys are set
+
+# --- Email (PDF gate, post-MVP) ---
+resend==2.5.1

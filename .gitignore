@@ -1,0 +1,46 @@
+# Real secrets — never commit
+.env
+.env.local
+.env.*.local
+
+# IMPORTANT: .env.example currently contains real keys (Groq + Qdrant).
+# Until those are rotated out into .env, keep it untracked too.
+.env.example
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+htmlcov/
+.coverage
+.coverage.*
+*.egg-info/
+build/
+dist/
+
+# Virtual envs
+.venv/
+venv/
+env/
+ENV/
+
+# Local app state — also ephemeral, never commit
+clausemark.db
+clausemark.db-journal
+uploads/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db

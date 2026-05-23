@@ -1,0 +1,69 @@
+# Render blueprint — free-tier ready.
+# After pushing this repo to GitHub, on Render: New → Blueprint → connect repo.
+# Render reads this file. Then fill in the `sync: false` secrets in the dashboard.
+services:
+  - type: web
+    name: clausemark-backend
+    runtime: python
+    plan: free
+    rootDir: clausemark-backend
+    buildCommand: pip install --upgrade pip && pip install -r requirements-render.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+
+      # Run mode — production uses real Groq/Gemini + persistent stores.
+      - key: APP_MODE
+        value: production
+
+      # Free-tier memory safety: skip the BGE models, keep the lite hybrids.
+      # The Groq LLM does the real reasoning; retrieval is best-effort.
+      # Flip these to "true" when you upgrade to Render Starter (1 GB RAM)
+      # and add `sentence-transformers` + `FlagEmbedding` to requirements.
+      - key: USE_REAL_EMBEDDER
+        value: "false"
+      - key: USE_REAL_RERANKER
+        value: "false"
+
+      # --- Secrets — set these in the Render dashboard ---
+      - key: GROQ_API_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+
+      # Qdrant Cloud (free 1 GB cluster)
+      - key: QDRANT_URL
+        sync: false
+      - key: QDRANT_API_KEY
+        sync: false
+
+      # Supabase Postgres (free 500 MB)
+      # Example: postgresql+asyncpg://postgres:<pw>@<host>:5432/postgres
+      - key: DATABASE_URL
+        sync: false
+
+      # Cloudflare R2 (free 10 GB, zero egress)
+      - key: R2_ACCESS_KEY
+        sync: false
+      - key: R2_SECRET_KEY
+        sync: false
+      - key: R2_BUCKET
+        sync: false
+      - key: R2_ENDPOINT
+        sync: false
+
+      # Observability — optional but free
+      - key: SENTRY_DSN
+        sync: false
+
+      # Email gate — optional
+      - key: RESEND_API_KEY
+        sync: false
+
+      # CORS — set this to your deployed frontend origin(s), comma-separated.
+      # Example: https://clausemark.vercel.app,https://clausemark.com
+      - key: CORS_ORIGINS
+        sync: false
